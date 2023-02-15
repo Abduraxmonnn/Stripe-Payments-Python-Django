@@ -1,0 +1,28 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css">
+    <script src="https://js.stripe.com/v3/"></script>
+    <script src="{% static 'main.js' %}"></script>
+    <script defer src="https://use.fontawesome.com/releases/v5.15.4/js/all.js"></script>
+</head>
+<body>
+{% block content %}
+    <h3>{{ item.name }}</h3>
+    {% for tag in item.tags.all %}
+        {{ tag.name }}
+    {% endfor %}
+    <p>{{ item.name }}</p>
+    <p>{{ item.description }}</p>
+    <p>Price: {{ item.price }}</p>
+    <p>Currency: {{ item.currency }}</p>
+    <div class="container">
+
+        <a href="http://localhost:8000/buy/{{ item.id }}" class="button is-primary" id="submitBtn">Purchase!</a>
+    </div>
+{% endblock %}
+</body>
+</html>

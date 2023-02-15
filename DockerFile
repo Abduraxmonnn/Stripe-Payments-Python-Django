@@ -1,0 +1,25 @@
+# pull the official base image
+FROM python:3-alpine3.16
+
+# set work directory
+WORKDIR ./web/stripe_billing
+
+# set enviroment variables
+ENV PYTHONUNBUFFERED 1
+ENV PYTHONFAULTHANDLER 1
+
+# create directory and copy projecct
+RUN mkdir /web
+COPY . ./web
+
+# install dependecies
+RUN pip install --upgrade pip
+COPY requirements.txt ./web
+RUN pip install -r ./web/requirements.txt
+
+RUN apk add sqlite3 libsqlite3-dev
+
+EXPOSE 8000
+
+CMD ["python", "./web/manage.py", "migrate"]
+CMD ["python", "./web/manage.py", "runserver", "0.0.0.0:8000"]

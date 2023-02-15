@@ -1,0 +1,12 @@
+{% extends "items/purchase.html" %}
+{% block content %}
+    <ul>
+        {% for item in items %}
+            <li>
+                <a style="font-size: large" href="{{ item.get_absolute_url }}">{{ item.name }}</a>
+                <p>Category: {{ item.description }}</p>
+                <p style="margin-bottom: 50px">Price: {{ item.price }}$</p>
+            </li>
+        {% endfor %}
+    </ul>
+{% endblock %}
